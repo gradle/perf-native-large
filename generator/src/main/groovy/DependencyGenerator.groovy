@@ -3,8 +3,6 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class DependencyGenerator {
     static Map<Project, List<Project>> generateDependencies(List<Project> projects) {
-        Map<Project, List<Project>> generatedDependencies = [:]
-
         def countDependencies = { Project project ->
             int dependencyCount = (project.modules.max { it.dependencies }?.dependencies) ?: 0
             dependencyCount
@@ -15,13 +13,14 @@ class DependencyGenerator {
             countDependencies(project)
         }.reverse()
 
+        Map<Project, List<Project>> generatedDependencies = [:]
         sortedByDependencies.eachWithIndex { Project project, int i ->
             int numberOfDependencies = countDependencies(project)
             List<Project> dependenciesForProject = []
             if (numberOfDependencies > 0) {
                 def possibleDependencies = [] + sortedByDependencies.subList(i + 1, sortedByDependencies.size() - 1)
                 Collections.shuffle(possibleDependencies, new Random(project.number as long))
-                dependenciesForProject = possibleDependencies.take(numberOfDependencies).sort {
+                dependenciesForProject = possibleDependencies.take(numberOfDependencies).sort(false) {
                     project.number
                 }
             }
@@ -30,6 +29,11 @@ class DependencyGenerator {
             }
             generatedDependencies.put(project, dependenciesForProject)
         }
-        generatedDependencies
+
+        Map<Project, List<Project>> orderedGeneratedDependencies = [:]
+        projects.each { Project project ->
+            orderedGeneratedDependencies.put(project, generatedDependencies.get(project))
+        }
+        orderedGeneratedDependencies
     }
 }
