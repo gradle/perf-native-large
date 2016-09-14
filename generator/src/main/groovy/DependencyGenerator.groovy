@@ -1,5 +1,14 @@
 import groovy.transform.CompileStatic
 
+/**
+ * Generates DAG dependencies to other projects
+ *
+ * - sorts the projects by the number of dependencies in descending order
+ *    - for each project
+ *        - randomly pick other projects as dependencies from the projects that follow
+ *          the current one in iteration order. This ensures that a DAG gets produced.
+ *
+ */
 @CompileStatic
 class DependencyGenerator {
     static Map<Project, List<Project>> generateDependencies(List<Project> projects) {
