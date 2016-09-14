@@ -19,3 +19,6 @@ gradle-app.setting
 /*.ipr
 /*.iws
 /.idea
+
+# Emacs
+*~
