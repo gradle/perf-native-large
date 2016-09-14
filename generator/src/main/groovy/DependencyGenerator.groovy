@@ -13,7 +13,7 @@ import groovy.transform.CompileStatic
 class DependencyGenerator {
     static Map<Project, List<Project>> generateDependencies(List<Project> projects) {
         def countDependencies = { Project project ->
-            int dependencyCount = (project.modules.max { it.dependencies }?.dependencies) ?: 0
+            int dependencyCount = (project.components.max { it.dependencies }?.dependencies) ?: 0
             dependencyCount
         }
 
