@@ -2,6 +2,6 @@ import groovy.transform.Canonical
 
 @Canonical
 class Project {
-    String name
+    int number
     List<Module> modules = []
 }

@@ -14,7 +14,7 @@ class ReportParser {
             line = line.trim()
             if (line) {
                 if (line.startsWith('project ')) {
-                    currentProject = new Project(name: line.substring('project '.length()).trim())
+                    currentProject = new Project(number: line.substring('project '.length()).trim() as int)
                     projects << currentProject
                 } else {
                     def m = (line =~ MODULE_PATTERN)
