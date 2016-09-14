@@ -20,7 +20,7 @@ class ReportParser {
                     def m = (line =~ MODULE_PATTERN)
                     if (m.matches()) {
                         def moduleType = m.group(1)
-                        Module module = new Module(type: moduleType)
+                        Module module = new Module(type: ReportModuleType.from(moduleType))
                         currentProject.modules << module
                         for (List attributePair : (WHITESPACE_PATTERN.split(m.group(2)) as List).collate(2)) {
                             int value = attributePair.get(0) as int
