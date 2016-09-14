@@ -12,7 +12,7 @@ class NativeLargeGenerator {
 
         def generatedDependencies = DependencyGenerator.generateDependencies(projects)
         generatedDependencies.each { Project p, List<Project> dependencies ->
-            println "project: ${p.number} dependencies: ${dependencies.collect{it.number}.join(',')}"
+            println "project: ${p.name} dependencies: ${dependencies.collect{it.name}.join(',')}"
         }
 
     }
