@@ -1,4 +1,5 @@
 import groovy.transform.Canonical
+import groovy.transform.CompileStatic
 import groovy.transform.TupleConstructor
 
 import java.util.regex.Pattern
@@ -20,7 +21,7 @@ class NativeLargeGenerator {
     }
 }
 
-
+@CompileStatic
 class ReportParser {
     static Pattern MODULE_PATTERN = ~/# (\S+) with (.*)$/
     static Pattern WHITESPACE_PATTERN = ~/\s+/
