@@ -34,7 +34,7 @@ class DependencyGenerator {
                 }
             }
             if (numberOfDependencies != dependenciesForProject.size()) {
-                println "WARN: unable to generate enough dependencies for ${project} , required ${numberOfDependencies}, actual ${dependenciesForProject.size()}"
+                throw new IllegalStateException("Unable to generate enough dependencies for ${project} , required ${numberOfDependencies}, actual ${dependenciesForProject.size()}")
             }
             generatedDependencies.put(project, dependenciesForProject)
         }
