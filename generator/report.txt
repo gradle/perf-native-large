@@ -320,9 +320,9 @@ project 56
 
 project 57
 
-# CMakeCudaStaticLibrary with 6 sources 6 headers 1 includePaths 128 dependencies
+# CMakeStaticLibrary with 6 sources 6 headers 1 includePaths 128 dependencies
 
-# CMakeCudaExecutable with 12 sources 6 headers 2 includePaths 129 dependencies
+# CMakeExecutable with 12 sources 6 headers 2 includePaths 129 dependencies
 
 # CMakeApiLibrary with 0 sources 6 headers 1 includePaths 0 dependencies
 
@@ -1268,114 +1268,6 @@ project 148
 
 project 149
 
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeImportedLibrary with 0 sources 0 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 13 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 36 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 4 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 8 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 18 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 36 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 9 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 19 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 26 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 31 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 40 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 9 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 21 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 11 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 8 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 39 headers 2 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 72 headers 3 includePaths 0 dependencies
-
-# CMakeApiLibrary with 0 sources 10 headers 2 includePaths 0 dependencies
-
 project 150
 
 project 151
@@ -1902,9 +1794,9 @@ project 245
 
 project 246
 
-# CMakeCudaSharedLibrary with 6 sources 6 headers 1 includePaths 116 dependencies
+# CMakeSharedLibrary with 6 sources 6 headers 1 includePaths 116 dependencies
 
-# CMakeCudaStaticLibrary with 6 sources 6 headers 1 includePaths 116 dependencies
+# CMakeStaticLibrary with 6 sources 6 headers 1 includePaths 116 dependencies
 
 # CMakeApiLibrary with 0 sources 6 headers 1 includePaths 0 dependencies
 
@@ -1936,11 +1828,11 @@ project 250
 
 project 251
 
-# CMakeCudaStaticLibrary with 14 sources 24 headers 1 includePaths 111 dependencies
+# CMakeStaticLibrary with 14 sources 24 headers 1 includePaths 111 dependencies
 
-# CMakeCudaExecutable with 17 sources 24 headers 2 includePaths 112 dependencies
+# CMakeExecutable with 17 sources 24 headers 2 includePaths 112 dependencies
 
-# CMakeCudaStaticLibrary with 5 sources 1 headers 2 includePaths 112 dependencies
+# CMakeStaticLibrary with 5 sources 1 headers 2 includePaths 112 dependencies
 
 # CMakeApiLibrary with 0 sources 24 headers 1 includePaths 0 dependencies
 
@@ -2330,31 +2222,19 @@ project 326
 
 project 327
 
-# CMakeApiLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
-
 project 328
 
 project 329
-
-# CMakeApiLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
 
 project 330
 
 project 331
 
-# CMakeApiLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
-
 project 332
-
-# CMakeApiLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
 
 project 333
 
-# CMakeApiLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
-
 project 334
-
-# CMakeApiLibrary with 0 sources 0 headers 3 includePaths 0 dependencies
 
 project 335
 
