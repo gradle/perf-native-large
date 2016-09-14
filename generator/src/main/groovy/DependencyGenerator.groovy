@@ -20,8 +20,8 @@ class DependencyGenerator {
             if (numberOfDependencies > 0) {
                 def possibleDependencies = [] + sortedByDependencies.subList(i + 1, sortedByDependencies.size() - 1)
                 Collections.shuffle(possibleDependencies, new Random(project.number as long))
-                dependenciesForProject = possibleDependencies.take(numberOfDependencies).sort(false) {
-                    project.number
+                dependenciesForProject = possibleDependencies.take(numberOfDependencies).sort(false) { Project p ->
+                    p.number
                 }
             }
             if (numberOfDependencies != dependenciesForProject.size()) {
