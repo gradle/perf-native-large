@@ -9,6 +9,12 @@ class NativeLargeGenerator {
         outputDir.mkdirs()
         List<Project> projects = ReportParser.parse(reportFile)
         println projects
+
+        def generatedDependencies = DependencyGenerator.generateDependencies(projects)
+        generatedDependencies.each { Project p, List<Project> dependencies ->
+            println "project: ${p.name} dependencies: ${dependencies.collect{it.name}.join(',')}"
+        }
+
     }
 
     static void main(String[] args) {
