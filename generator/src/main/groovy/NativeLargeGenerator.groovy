@@ -6,22 +6,18 @@ class NativeLargeGenerator {
     File outputDir
 
     void generate() {
+        outputDir.deleteDir()
         outputDir.mkdirs()
         List<Project> projects = ReportParser.parse(reportFile)
 
-        ProjectClassifier.classify(projects)
-        projects.each {
-            println it
-        }
-
-        def generatedDependencies = DependencyGenerator.generateDependencies(projects)
-        generatedDependencies.each { Project p, List<Project> dependencies ->
-            println "project: ${p.name} dependencies: ${dependencies.collect{it.name}.join(',')}"
+        projects.each { project ->
+            File projectDir = new File(outputDir, project.name)
+            projectDir.mkdir()
         }
     }
 
     static void main(String[] args) {
-        def generator = new NativeLargeGenerator(new File('report.txt'), new File('/tmp/native-large'))
+        def generator = new NativeLargeGenerator(new File('components.txt'), new File('/tmp/native-large'))
         generator.generate()
     }
 }

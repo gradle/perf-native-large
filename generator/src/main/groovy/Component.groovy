@@ -2,12 +2,12 @@ import groovy.transform.Canonical
 
 @Canonical
 class Component {
+    String name
     GradleComponentType type
     int sources
     int headers
     int includePaths
-    int dependencies
+    List<String> dependencies
     // Only relevant for GradleComponentType.NATIVE_LIBRARY_SPEC
     boolean hasSharedLibrary
-    boolean isGenerationComponent
 }
