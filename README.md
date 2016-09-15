@@ -53,7 +53,7 @@ $> gradle assemble
 
 ## Profiling with honest-profiler
 
-There is a script [`prof.sh`](profiler/prof.sh) which automates profiling.
+There is a script [`prof.sh`](profiler/prof.sh) which automates running honest-profiler and creating a flamegraph of the execution.
 
 These environment variables must be set to run the script:
 - `JAVA_HOME` : path to the JDK
