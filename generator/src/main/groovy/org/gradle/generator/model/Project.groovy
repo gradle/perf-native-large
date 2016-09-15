@@ -9,6 +9,7 @@ class Project {
     int number
     List<Component> components = []
     List<Component> prebuiltLibraries = []
+    List<Component> testSuites = []
 
     String getName() {
         "project${String.format("%03d", number)}"
@@ -16,12 +17,15 @@ class Project {
 
     String toString() {
         def results = new StringBuilder(getName()).append("\n")
-        results.append("Components [${components.size() + prebuiltLibraries.size()}]\n")
+        results.append("Components [${components.size() + prebuiltLibraries.size() + testSuites.size()}]\n")
         components.each { component ->
             results.append("  $component\n")
         }
         prebuiltLibraries.each { component ->
             results.append("  $component (prebuilt)\n")
+        }
+        testSuites.each { component ->
+            results.append("  $component (testSuite)\n")
         }
         results.toString()
     }

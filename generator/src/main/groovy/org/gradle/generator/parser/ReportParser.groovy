@@ -31,6 +31,8 @@ class ReportParser {
                         Component component = componentFrom(name, moduleType)
                         if (GradleComponentType.PREBUILT_LIBRARY == component.type) {
                             currentProject.prebuiltLibraries << component
+                        } else if (GradleComponentType.GOOGLE_TEST_TEST_SUITE_SPEC == component.type) {
+                            currentProject.testSuites << component
                         } else {
                             currentProject.components << component
                         }
