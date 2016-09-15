@@ -11,13 +11,15 @@ class Subproject {
     static final File SRC_CPP = new File("src/main/templates/src.cpp")
     static final File SRC_H = new File("src/main/templates/src.h")
     static final File BIN_CPP = new File("src/main/templates/bin.cpp")
+    final Map<String, Project> depsProviderMap
     final SimpleTemplateEngine engine
     final Project project
     final File rootDir
 
-    Subproject(File rootDir, Project project) {
+    Subproject(File rootDir, Project project, Map<String, Project> depsProviderMap) {
         this.rootDir = rootDir
         this.project = project
+        this.depsProviderMap = depsProviderMap
         this.engine = new SimpleTemplateEngine()
     }
 
@@ -86,7 +88,7 @@ model {
 '''
         if (project.prebuiltLibraries) {
             writer << '    repositories { \n'
-            writer << '        libs(PrebuiltBinaries) {\n'
+            writer << '        libs(PrebuiltLibraries) {\n'
             project.prebuiltLibraries.each { Component component ->
                 writer << "            ${component.name}\n"
             }
@@ -99,8 +101,22 @@ model {
                 writer << "        ${component.name}(${component.type.name}) {\n"
                 if (!component.hasSharedLibrary) {
                     writer << '            binaries.withType(SharedLibraryBinarySpec) {\n'
-                    writer << '                buildable = false'
-                    writer << '            }'
+                    writer << '                buildable = false\n'
+                    writer << '            }\n'
+                }
+                if (component.dependencies) {
+                    writer << '            sources {\n'
+                    writer << '                cpp {\n'
+                    component.dependencies.each { String dep ->
+                        if (depsProviderMap.containsKey(dep)) {
+                            def projectName = depsProviderMap[dep].name
+                            writer << "                    lib project: ':$projectName', library: '$dep', linkage: 'static'\n"
+                        } else {
+                            // println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
+                        }
+                    }
+                    writer << '                }\n'
+                    writer << '            }\n'
                 }
                 writer << '        }\n'
             }

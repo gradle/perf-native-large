@@ -13,9 +13,10 @@ class NativeLargeGenerator {
     File outputDir
 
     void generate() {
-        List<Project> projects = ReportParser.parse(reportFile)
+        Map<String, Project> depsProviderMap = [:]
+        List<Project> projects = ReportParser.parse(reportFile, depsProviderMap)
 
-        new Root(outputDir).populateWith(projects)
+        new Root(outputDir).populateWith(projects, depsProviderMap)
     }
 
     static void main(String[] args) {

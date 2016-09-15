@@ -9,7 +9,7 @@ class Root {
         this.rootDir = rootDir
     }
 
-    def populateWith(List<Project> projects) {
+    def populateWith(List<Project> projects, Map<String, Project> depsProviderMap) {
         rootDir.mkdirs()
 
         SettingsFile settings = new SettingsFile(rootDir, projects.size())
@@ -17,7 +17,7 @@ class Root {
         projects.each { project ->
             settings.addProject(project)
 
-            new Subproject(rootDir, project).populate()
+            new Subproject(rootDir, project, depsProviderMap).populate()
         }
     }
 }

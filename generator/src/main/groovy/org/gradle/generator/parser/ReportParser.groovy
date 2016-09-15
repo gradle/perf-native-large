@@ -13,7 +13,7 @@ class ReportParser {
     static Pattern COMPONENT_PATTERN = ~/# (\S+) \((.*)\) (.*)\.  Dependencies: (.*)$/
     static Pattern WHITESPACE_PATTERN = ~/\s+/
 
-    static List<Project> parse(File reportFile) {
+    static List<Project> parse(File reportFile, Map<String, Project> depsProviderMap) {
         List<Project> projects = []
         Project currentProject
         reportFile.eachLine { String line ->
@@ -28,6 +28,8 @@ class ReportParser {
                         def name = sanitizeName(m.group(1))
                         ReportModuleType moduleType = ReportModuleType.from(m.group(2))
                         assert moduleType != null : "$currentProject.name has unexpected Module Type: $moduleType"
+                        // Useful to build this map now to efficiently get projects which provide dependencies later.
+                        depsProviderMap.put(name, currentProject)
                         Component component = componentFrom(name, moduleType)
                         if (GradleComponentType.PREBUILT_LIBRARY == component.type) {
                             currentProject.prebuiltLibraries << component
