@@ -39,6 +39,9 @@ class Subproject {
         project.testSuites.each { Component component ->
             writeFilesForComponent(projectDir, component)
         }
+        project.prebuiltLibraries.each {Component component ->
+            writeFilesForComponent(projectDir, component)
+        }
     }
 
     def writeFilesForComponent(File projectDir, Component component) {
