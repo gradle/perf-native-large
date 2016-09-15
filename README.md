@@ -24,7 +24,7 @@ this repository and the corresponding `settings.gradle` file which
 ties the projects together in one big happy multiproject build.
 
 Specifically, it is parsing the
-[customers.txt](generator/customers.txt) file and generating c++
+[components.txt](generator/components.txt) file and generating c++
 source code, header files and references to prebuit native libraries
 on your platform. For each othese projects and all their complicated
 interdependencies.
