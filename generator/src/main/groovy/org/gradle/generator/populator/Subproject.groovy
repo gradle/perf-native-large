@@ -9,6 +9,7 @@ import org.gradle.generator.model.Project
 @CompileStatic
 class Subproject {
     static final File SRC_CPP = new File("src/main/templates/src.cpp")
+    static final File SRC_H = new File("src/main/templates/src.h")
     static final File BIN_CPP = new File("src/main/templates/bin.cpp")
     final SimpleTemplateEngine engine
     final Project project
@@ -45,6 +46,14 @@ class Subproject {
                     def src = new File(cppDir, "lib${it + 1}.cpp")
                     src << engine.createTemplate(SRC_CPP).make(binding)
                 }
+            }
+            def headersDir = new File(projectDir, "src/$component.name/headers")
+            headersDir.mkdirs()
+            def numberOfHeaders = component.headers
+            numberOfHeaders.times {
+                def binding = ["component" : component.name, "it": it]
+                def hFile = new File(headersDir, "lib${it+1}.h")
+                hFile << engine.createTemplate(SRC_H).make(binding)
             }
         }
     }
