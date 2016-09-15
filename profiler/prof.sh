@@ -68,7 +68,7 @@ else
   buildparams=( "$@" )
 fi
 
-export JAVA_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -agentpath:$HP_HOME_DIR/liblagent.so=interval=$interval,logPath=$WORKDIR/hp.log,port=18080,host=localhost,start=0'"
+export GRADLE_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -agentpath:$HP_HOME_DIR/liblagent.so=interval=$interval,logPath=$WORKDIR/hp.log,port=18080,host=localhost,start=0'"
 
 # END OF CONFIGURATION
 
