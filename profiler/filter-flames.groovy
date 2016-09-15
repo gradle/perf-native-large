@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 import groovy.transform.CompileStatic
 
 @CompileStatic
@@ -54,4 +55,9 @@ static void sanitize(String input, String out) {
 
 }
 
-sanitize('/tmp/flames.txt', '/tmp/flames-sanitized.txt')
+if(args.size() < 2) {
+    System.err.println("Pass input and output files as parameter.")
+    System.exit(1)
+}
+
+sanitize(args[0], args[1])
