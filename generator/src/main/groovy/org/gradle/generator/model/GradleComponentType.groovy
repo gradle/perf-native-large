@@ -1,3 +1,5 @@
+package org.gradle.generator.model
+
 import groovy.transform.CompileStatic
 
 @CompileStatic

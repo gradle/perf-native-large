@@ -1,5 +1,10 @@
+package org.gradle.generator
+
 import groovy.transform.CompileStatic
 import groovy.transform.TupleConstructor
+import org.gradle.generator.model.Project
+import org.gradle.generator.parser.ReportParser
+import org.gradle.generator.populator.SettingsFile
 
 @CompileStatic
 @TupleConstructor

@@ -1,4 +1,10 @@
+package org.gradle.generator.parser
+
 import groovy.transform.CompileStatic
+import org.gradle.generator.model.Component
+import org.gradle.generator.model.GradleComponentType
+import org.gradle.generator.model.Project
+import org.gradle.generator.model.ReportModuleType
 
 import java.util.regex.Pattern
 

@@ -1,4 +1,7 @@
+package org.gradle.generator.populator
+
 import groovy.transform.CompileStatic
+import org.gradle.generator.model.Project
 
 @CompileStatic
 class SettingsFile {

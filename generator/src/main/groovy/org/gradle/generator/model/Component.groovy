@@ -1,3 +1,5 @@
+package org.gradle.generator.model
+
 import groovy.transform.Canonical
 import groovy.transform.CompileStatic
 
@@ -10,6 +12,6 @@ class Component {
     int headers
     int includePaths
     List<String> dependencies
-    // Only relevant for GradleComponentType.NATIVE_LIBRARY_SPEC
+    // Only relevant for org.gradle.generator.model.GradleComponentType.NATIVE_LIBRARY_SPEC
     boolean hasSharedLibrary
 }
