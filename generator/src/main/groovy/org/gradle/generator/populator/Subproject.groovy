@@ -22,9 +22,12 @@ class Subproject {
         def buildFile = new File(projectDir, "build.gradle")
         buildFile.delete()
         def writer = buildFile.newWriter()
-        writer << '''plugins {
-    id 'cpp'
-}
+        writer << 'plugins {\n'
+        writer << "    id 'cpp'\n"
+        if (project.testSuites) {
+            writer << "    id 'google-test-test-suite'"
+        }
+        writer << '''}
 
 model {
     buildTypes {
@@ -46,6 +49,15 @@ model {
             writer << '    components {\n'
             project.components.each { Component component ->
                 writer << "        ${component.name}(${component.type.name}) {\n"
+                writer << '        }\n'
+            }
+            writer << '    }\n'
+        }
+        if (project.testSuites) {
+            writer << '    testSuites {\n'
+            project.testSuites.each { Component component ->
+                writer << "        ${component.name}(${component.type.name}) {\n"
+                writer << "            testing \$.components.${project.components.first().name}"
                 writer << '        }\n'
             }
             writer << '    }\n'
