@@ -50,3 +50,16 @@ $> gradle assemble
 *Note* I haven't added a top-level `build.gradle` file yet because I
  didn't want people to see it in the repo and think this project would
  behave just like any other one you've used before.
+
+## Profiling with honest-profiler
+
+There is a script [`prof.sh`](profiler/prof.sh) which automates profiling.
+
+These environment variables must be set to run the script:
+- `JAVA_HOME` : path to the JDK
+- `HP_HOME_DIR` : path to an installation of [honest-profiler](https://github.com/RichardWarburton/honest-profiler). This must be compiled from sources since it requires some changes that are in master branch.
+- `FG_HOME_DIR` : path to an installation of [FlameGraph](https://github.com/brendangregg/FlameGraph). This is a clone of the [FlameGraph repository](https://github.com/brendangregg/FlameGraph).
+- `GRADLE_BIN` : path to the gradle binary which will be used to execute the builds. 
+
+Example command
+`GRADLE_BIN=~/.sdkman/gradle/3.1-rc-1/bin/gradle ./profiler/prof.sh assemble`
