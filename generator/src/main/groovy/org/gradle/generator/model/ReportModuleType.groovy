@@ -10,7 +10,8 @@ enum ReportModuleType {
     CUDA_STATIC_LIBRARY("CudaStaticLibrary"),
     CUDA_EXECUTABLE("CudaExecutable"),
     EXECUTABLE("Executable"),
-    PREBUILT_LIBRARY("PrebuiltLibrary")
+    PREBUILT_SHARED("PrebuiltShared"),
+    PREBULIT_STATIC("PrebuiltStatic")
 
     final String name
     static final Map<String, ReportModuleType> reverseMap

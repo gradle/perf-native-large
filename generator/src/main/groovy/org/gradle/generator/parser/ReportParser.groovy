@@ -10,7 +10,7 @@ import java.util.regex.Pattern
 
 @CompileStatic
 class ReportParser {
-    static Pattern COMPONENT_PATTERN = ~/# (\S+) \((.*)\) (.*)\.  Dependencies: \[(.*)\]$/
+    static Pattern COMPONENT_PATTERN = ~/# (\S+) \((.*)\) (.*)\.  Dependencies: (.*)$/
     static Pattern WHITESPACE_PATTERN = ~/\s+/
 
     static List<Project> parse(File reportFile) {
@@ -35,8 +35,10 @@ class ReportParser {
                             String field = attributePair.get(1)
                             component.setProperty(field, value)
                         }
-                        for (String dep : m.group(4).split(', ')) {
-                            if (dep != 'none') {
+                        def deps = m.group(4)
+                        if (deps.startsWith('[')) {
+                            deps = deps.substring(1, deps.length() - 1)
+                            for (String dep : deps.split(', ')) {
                                 component.dependencies << sanitizeName(dep)
                             }
                         }
@@ -68,8 +70,12 @@ class ReportParser {
                     toReturn.type = GradleComponentType.NATIVE_EXECUTABLE_SPEC
                 }
                 break
-            case ReportModuleType.PREBUILT_LIBRARY:
+            case ReportModuleType.PREBUILT_SHARED:
                 toReturn.type = GradleComponentType.PREBUILT_LIBRARY
+                break
+            case ReportModuleType.PREBULIT_STATIC:
+                toReturn.type = GradleComponentType.PREBUILT_LIBRARY
+                toReturn.hasSharedLibrary = false
                 break
             default:
                 break
