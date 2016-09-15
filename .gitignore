@@ -26,3 +26,10 @@ gradle-app.setting
 
 # Emacs
 *~
+
+# prof.sh script output files
+flames-sanitized.txt
+flames.svg
+flames.txt
+hp.log
+hp-ref.log
