@@ -32,29 +32,37 @@ class Subproject {
 
     def writeSourceFiles(File projectDir) {
         project.components.each { Component component ->
-            def cppDir = new File(projectDir, "src/$component.name/cpp")
-            cppDir.mkdirs()
-            def needAMain = GradleComponentType.NATIVE_EXECUTABLE_SPEC == component.type
-            def numberOfSources = component.sources
-            numberOfSources.times {
-                def binding = ["component" : component.name, "it": it]
-                // We'll make the first source file have a main.
-                if (it == 0) {
-                    def src = new File(cppDir, "main.cpp")
-                    src << engine.createTemplate(BIN_CPP).make(binding)
-                } else {
-                    def src = new File(cppDir, "lib${it + 1}.cpp")
-                    src << engine.createTemplate(SRC_CPP).make(binding)
-                }
+            writeFilesForComponent(projectDir, component)
+        }
+        project.testSuites.each { Component component ->
+            writeFilesForComponent(projectDir, component)
+        }
+    }
+
+    def writeFilesForComponent(File projectDir, Component component) {
+        def cppDir = new File(projectDir, "src/$component.name/cpp")
+        cppDir.mkdirs()
+        def needAMain = (GradleComponentType.NATIVE_EXECUTABLE_SPEC == component.type
+                || GradleComponentType.GOOGLE_TEST_TEST_SUITE_SPEC == component.type)
+        def numberOfSources = component.sources
+        numberOfSources.times {
+            def binding = ["component" : component.name, "it": it]
+            // We'll make the first source file have a main.
+            if (it == 0) {
+                def src = new File(cppDir, "main.cpp")
+                src << engine.createTemplate(BIN_CPP).make(binding)
+            } else {
+                def src = new File(cppDir, "lib${it + 1}.cpp")
+                src << engine.createTemplate(SRC_CPP).make(binding)
             }
-            def headersDir = new File(projectDir, "src/$component.name/headers")
-            headersDir.mkdirs()
-            def numberOfHeaders = component.headers
-            numberOfHeaders.times {
-                def binding = ["component" : component.name, "it": it]
-                def hFile = new File(headersDir, "lib${it+1}.h")
-                hFile << engine.createTemplate(SRC_H).make(binding)
-            }
+        }
+        def headersDir = new File(projectDir, "src/$component.name/headers")
+        headersDir.mkdirs()
+        def numberOfHeaders = component.headers
+        numberOfHeaders.times {
+            def binding = ["component" : component.name, "it": it]
+            def hFile = new File(headersDir, "lib${it+1}.h")
+            hFile << engine.createTemplate(SRC_H).make(binding)
         }
     }
 
