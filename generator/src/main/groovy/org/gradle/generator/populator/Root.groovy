@@ -17,8 +17,7 @@ class Root {
         projects.each { project ->
             settings.addProject(project)
 
-            File projectDir = new File(rootDir, project.name)
-            projectDir.mkdir()
+            new Subproject(rootDir, project).populate()
         }
     }
 }

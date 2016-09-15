@@ -25,7 +25,7 @@ class ReportParser {
                 } else {
                     def m = (line =~ COMPONENT_PATTERN)
                     if (m.matches()) {
-                        def name = m.group(1)
+                        def name = sanitizeName(m.group(1))
                         ReportModuleType moduleType = ReportModuleType.from(m.group(2))
                         assert moduleType != null : "$currentProject.name has unexpected Module Type: $moduleType"
                         Component component = componentFrom(name, moduleType)
@@ -36,7 +36,9 @@ class ReportParser {
                             component.setProperty(field, value)
                         }
                         for (String dep : m.group(4).split(', ')) {
-                            component.dependencies << dep
+                            if (dep != 'none') {
+                                component.dependencies << sanitizeName(dep)
+                            }
                         }
                     }
                 }
@@ -73,5 +75,19 @@ class ReportParser {
                 break
         }
         toReturn
+    }
+
+    static String sanitizeName(String name) {
+        StringBuilder builder = new StringBuilder()
+        def justSawAHyphen = false
+        for (char c : name.toCharArray()) {
+            if (c != '-') {
+                builder.append(justSawAHyphen ? c.toUpperCase() : c)
+                justSawAHyphen = false
+            } else {
+                justSawAHyphen = true
+            }
+        }
+        builder.toString()
     }
 }
