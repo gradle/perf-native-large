@@ -33,6 +33,15 @@ model {
         prod
     }
 '''
+        if (project.prebuiltLibraries) {
+            writer << '    repositories { \n'
+            writer << '        libs(PrebuiltBinaries) {\n'
+            project.prebuiltLibraries.each { Component component ->
+                writer << "            ${component.name}\n"
+            }
+            writer << '        }\n'
+            writer << '    }\n'
+        }
         if (project.components) {
             writer << '    components {\n'
             project.components.each { Component component ->
