@@ -99,6 +99,6 @@ cp $WORKDIR/hp.log $WORKDIR/hp-ref.log
 
 $JAVA_HOME/bin/java -cp $JAVA_HOME/lib/tools.jar:$HP_HOME_DIR/honest-profiler.jar com.insightfullogic.honest_profiler.ports.console.FlameGraphDumperApplication $WORKDIR/hp.log $WORKDIR/flames.txt
 $STACKTRACE_SANITIZER $WORKDIR/flames.txt $WORKDIR/flames-sanitized.txt
-$FG_HOME_DIR/flamegraph.pl $WORKDIR/flames-sanitized.txt > $WORKDIR/$filename.svg
+$FG_HOME_DIR/flamegraph.pl --title "$($GRADLE_BIN --version|egrep 'Gradle|Revision' |xargs echo) Args: ${buildparams[@]} Date: $(date)" $WORKDIR/flames-sanitized.txt > $WORKDIR/$filename.svg
 
 echo "Output in $WORKDIR/$filename.svg"
