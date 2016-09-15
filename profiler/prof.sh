@@ -18,7 +18,7 @@
 
 WORKDIR="$PWD"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export STACKTRACE_SANITIZER="$DIR/filter-flames.groovy"
+export STACKTRACE_SANITIZER="$DIR/filter_flames.groovy"
 export GROOVY_OPTS="-Xms2g -Xmx2g"
 
 if [ -z "$JAVA_HOME" ]; then
