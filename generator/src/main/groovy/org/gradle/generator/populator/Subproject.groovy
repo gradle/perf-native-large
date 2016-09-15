@@ -16,6 +16,7 @@ class Subproject {
 
     def populate() {
         def projectDir = new File(rootDir, project.name)
+        projectDir.deleteDir()
         projectDir.mkdir()
 
         def buildFile = new File(projectDir, "build.gradle")
