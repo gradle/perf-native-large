@@ -1,5 +1,7 @@
+import groovy.transform.CompileStatic
 import groovy.transform.TupleConstructor
 
+@CompileStatic
 @TupleConstructor
 class NativeLargeGenerator {
     File reportFile

@@ -1,3 +1,6 @@
+import groovy.transform.CompileStatic
+
+@CompileStatic
 class SettingsFile {
     static final int INCLUDES_PER_LINE = 8
     static final String SETTINGS_FILE_NAME = "settings.gradle"

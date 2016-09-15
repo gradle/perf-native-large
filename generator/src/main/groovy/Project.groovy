@@ -1,5 +1,7 @@
 import groovy.transform.Canonical
+import groovy.transform.CompileStatic
 
+@CompileStatic
 @Canonical
 class Project {
     int number
