@@ -2,12 +2,12 @@
 # This script will execute a Gradle build several times with profiling to generate a flame graph that
 # can be used to diagnose performance issues.
 # Usage:
-#   $ ./prof.sh [basename] [interval] [warmups] [runs] [tasks]
+#   $ ./prof.sh [-f basename] [-i interval] [-w warmups] [-r runs] [build parameters]
 # * basename: name of the generated flame graph file. Defaults to "flames", which will generate "flames.svg"
 # * interval: the sampling interval. Defaults to 7ms, the time between 2 samples. Should preferably be a prime number.
 # * warmups: the number of warmups. Defaults to 3. Warmups are excluded from profiling.
 # * runs: the number of runs. Defaults to 10. Runs are executed with Honest Profiler activated. See below.
-# * tasks: the tasks to be executed. Defaults to "help"
+# * build parameters: parameters (tasks) to be passed to the build. Defaults to "help"
 #
 # The script requires the following properties to be configured for YOUR environment
 #
@@ -38,11 +38,35 @@ if [ -z "$GRADLE_BIN" ]; then
     exit 1
 fi
 
-filename=${1-'flames'}
-interval=${2-'7'}
-warmups=${3-'3'}
-runs=${4-'10'}
-tasks=${5-'help'}
+filename=flames
+interval=7
+warmups=3
+runs=10
+
+local OPTIND OPTARG OPTERR opt
+while getopts "f:i:w:r:" opt; do
+    case "${opt}" in
+        f)
+        filename="${OPTARG}"
+        ;;
+        i)
+        interval="${OPTARG}"
+        ;;
+        w)
+        warmups="${OPTARG}"
+        ;;
+        r)
+        runs="${OPTARG}"
+        ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ "$#" -eq 0 ]; then
+  buildparams=( "help" )
+else
+  buildparams=( "$@" )
+fi
 
 export JAVA_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -agentpath:$HP_HOME_DIR/liblagent.so=interval=$interval,logPath=$WORKDIR/hp.log,port=18080,host=localhost,start=0'"
 
@@ -57,7 +81,7 @@ echo "Profile to $filename at interval $interval"
 rm -f $WORKDIR/hp.log
 for n in $(seq $warmups); do 
    echo "Warmup... $n/$warmups"
-   $GRADLE_BIN --daemon -u $tasks
+   $GRADLE_BIN --daemon -u "${buildparams[@]}"
 done
 echo status | nc localhost 18080
 echo "Starting profiler"
@@ -66,7 +90,7 @@ echo status | nc localhost 18080
 echo "Measuring..."
 for n in $(seq $runs); do 
   echo "Iteration $n/$runs"
-  $GRADLE_BIN --daemon -u $tasks
+  $GRADLE_BIN --daemon -u "${buildparams[@]}"
 done
 echo stop | nc localhost 18080
 echo status | nc localhost 18080
