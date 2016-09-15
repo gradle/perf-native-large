@@ -6,11 +6,16 @@ class NativeLargeGenerator {
     File outputDir
 
     void generate() {
-        outputDir.deleteDir()
-        outputDir.mkdirs()
         List<Project> projects = ReportParser.parse(reportFile)
 
+        outputDir.deleteDir()
+        outputDir.mkdirs()
+
+        SettingsFile settings = new SettingsFile(new File(outputDir, 'settings.gradle'), projects.size())
+
         projects.each { project ->
+            settings.addProject(project)
+
             File projectDir = new File(outputDir, project.name)
             projectDir.mkdir()
         }
