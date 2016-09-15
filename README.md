@@ -9,7 +9,7 @@ in our code generation scripts.
 
 Clone the repo:
 ```sh
-$> git clone https://github.com/gradle/perf-native-large
+$> git clone https://github.com/gradle/perf-native-large.git
 $> cd perf-native-large
 ```
 
