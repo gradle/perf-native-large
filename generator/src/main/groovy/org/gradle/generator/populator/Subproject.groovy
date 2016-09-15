@@ -22,16 +22,16 @@ class Subproject {
         buildFile.delete()
         def writer = buildFile.newWriter()
         writer << 'plugins {\n'
-        writer << "  id 'cpp'\n"
+        writer << "    id 'cpp'\n"
         writer << '}\n\n'
         if (project.components) {
             writer << 'model {\n'
-            writer << '  components {\n'
+            writer << '    components {\n'
             project.components.each { Component component ->
-                writer << "    ${component.name}(${component.type.name}) {\n"
-                writer << '    }\n'
+                writer << "        ${component.name}(${component.type.name}) {\n"
+                writer << '        }\n'
             }
-            writer << '  }\n'
+            writer << '    }\n'
             writer << '}\n'
         }
         writer.close()
