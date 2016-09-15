@@ -93,7 +93,9 @@ model {
             writer << '    repositories { \n'
             writer << '        libs(PrebuiltLibraries) {\n'
             project.prebuiltLibraries.each { Component component ->
-                writer << "            ${component.name}\n"
+                writer << "            ${component.name} {\n"
+                writer << getPrebuiltLibraryText()
+                writer << "            }"
             }
             writer << '        }\n'
             writer << '    }\n'
@@ -136,5 +138,29 @@ model {
         }
         writer << '}\n'
         writer.close()
+    }
+
+    static String getPrebuiltLibraryText() {
+        '''                headers.srcDir "prebuilt/util/src/util/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a\'
+                    staticLibraryFile = file("prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libhello.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+        '''
     }
 }

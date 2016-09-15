@@ -3,6 +3,7 @@ model {
     buildTypes {
         debug
         release
+        prod
     }
     components {
         util(NativeLibrarySpec) {
