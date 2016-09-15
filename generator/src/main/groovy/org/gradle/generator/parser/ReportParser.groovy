@@ -29,7 +29,11 @@ class ReportParser {
                         ReportModuleType moduleType = ReportModuleType.from(m.group(2))
                         assert moduleType != null : "$currentProject.name has unexpected Module Type: $moduleType"
                         Component component = componentFrom(name, moduleType)
-                        currentProject.components << component
+                        if (GradleComponentType.PREBUILT_LIBRARY == component.type) {
+                            currentProject.prebuiltLibraries << component
+                        } else {
+                            currentProject.components << component
+                        }
                         for (List attributePair : (WHITESPACE_PATTERN.split(m.group(3)) as List).collate(2)) {
                             int value = attributePair.get(0) as int
                             String field = attributePair.get(1)
