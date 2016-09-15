@@ -20,6 +20,7 @@ class SettingsFile {
     }
 
     def initialize() {
+        settings.delete()
         settings << "rootProject.name = 'perf-native-large'\n"
     }
 
