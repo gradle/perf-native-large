@@ -1,5 +1,10 @@
-apply plugin: 'groovy'
-apply plugin: 'idea'
+plugins {
+  id 'groovy'
+  id 'idea'
+  id 'application'
+}
+
+mainClassName = 'org.gradle.generator.NativeLargeGenerator'
 
 repositories {
     jcenter()
@@ -11,3 +16,4 @@ dependencies {
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
     testCompile 'junit:junit:4.12'
 }
+
