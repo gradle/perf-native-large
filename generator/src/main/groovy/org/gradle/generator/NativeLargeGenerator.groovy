@@ -20,7 +20,7 @@ class NativeLargeGenerator {
     }
 
     static void main(String[] args) {
-        def generator = new NativeLargeGenerator(new File('components.txt'), new File('/tmp/native-large'))
+        def generator = new NativeLargeGenerator(new File('components.txt'), new File('../'))
         generator.generate()
     }
 }
