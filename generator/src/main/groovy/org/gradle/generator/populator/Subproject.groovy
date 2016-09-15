@@ -49,6 +49,11 @@ model {
             writer << '    components {\n'
             project.components.each { Component component ->
                 writer << "        ${component.name}(${component.type.name}) {\n"
+                if (!component.hasSharedLibrary) {
+                    writer << '            binaries.withType(SharedLibraryBinarySpec) {\n'
+                    writer << '                buildable = false'
+                    writer << '            }'
+                }
                 writer << '        }\n'
             }
             writer << '    }\n'
