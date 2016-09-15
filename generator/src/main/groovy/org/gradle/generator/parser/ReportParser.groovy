@@ -62,7 +62,7 @@ class ReportParser {
                 break
             case ReportModuleType.EXECUTABLE:
             case ReportModuleType.CUDA_EXECUTABLE:
-                if (name.startsWith('test-')) {
+                if (name.startsWith('test')) {
                     toReturn.type = GradleComponentType.GOOGLE_TEST_TEST_SUITE_SPEC
                 } else {
                     toReturn.type = GradleComponentType.NATIVE_EXECUTABLE_SPEC
