@@ -3,8 +3,6 @@ package org.gradle.generator.parser
 import groovy.transform.CompileStatic
 import org.gradle.generator.model.Component
 import org.gradle.generator.model.GradleComponentType
-import org.gradle.generator.model.Library
-import org.gradle.generator.model.Linkage
 import org.gradle.generator.model.Project
 import org.gradle.generator.model.ReportModuleType
 
@@ -64,30 +62,14 @@ class ReportParser {
     }
 
     static Component componentFrom(String name, ReportModuleType type) {
-        Component toReturn = new Component(name: name, dependencies: [], libraries: [])
+        Component toReturn = new Component(name)
         switch (type) {
             case ReportModuleType.SHARED_LIBRARY:
             case ReportModuleType.CUDA_SHARED_LIBRARY:
-                toReturn.type = GradleComponentType.NATIVE_LIBRARY_SPEC
-                toReturn.libraries << new Library(linkage: Linkage.SHARED, name: name)
-                toReturn.hasSharedLibrary = true
-                toReturn.hasStaticLibrary = false
-                toReturn.hasApiLibrary = false
-                break
             case ReportModuleType.STATIC_LIBRARY:
             case ReportModuleType.CUDA_STATIC_LIBRARY:
-                toReturn.type = GradleComponentType.NATIVE_LIBRARY_SPEC
-                toReturn.libraries << new Library(linkage: Linkage.STATIC, name: name)
-                toReturn.hasSharedLibrary = false
-                toReturn.hasStaticLibrary = false
-                toReturn.hasApiLibrary = false
-                break
             case ReportModuleType.API_LIBRARY:
                 toReturn.type = GradleComponentType.NATIVE_LIBRARY_SPEC
-                toReturn.libraries << new Library(linkage: Linkage.API, name: name)
-                toReturn.hasSharedLibrary = false
-                toReturn.hasStaticLibrary = false
-                toReturn.hasApiLibrary = false
                 break
             case ReportModuleType.EXECUTABLE:
             case ReportModuleType.CUDA_EXECUTABLE:
@@ -99,15 +81,18 @@ class ReportParser {
                 break
             case ReportModuleType.PREBUILT_SHARED:
                 toReturn.type = GradleComponentType.PREBUILT_LIBRARY
+                toReturn.hasSharedLibrary = true
+                toReturn.hasStaticLibrary = true
+                toReturn.hasApiLibrary = true
                 break
             case ReportModuleType.PREBULIT_STATIC:
                 toReturn.type = GradleComponentType.PREBUILT_LIBRARY
-                toReturn.hasSharedLibrary = false
+                toReturn.hasStaticLibrary = true
+                toReturn.hasApiLibrary = true
                 break
             case ReportModuleType.PREBUILT_API:
                 toReturn.type = GradleComponentType.PREBUILT_LIBRARY
-                toReturn.hasSharedLibrary = false
-                toReturn.hasStaticLibrary = false
+                toReturn.hasApiLibrary = true
                 break
             default:
                 break
