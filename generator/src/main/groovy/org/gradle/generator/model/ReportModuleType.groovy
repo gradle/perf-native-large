@@ -4,12 +4,14 @@ import groovy.transform.CompileStatic
 
 @CompileStatic
 enum ReportModuleType {
+    API_LIBRARY("ApiLibrary"),
     SHARED_LIBRARY("SharedLibrary"),
     STATIC_LIBRARY("StaticLibrary"),
     CUDA_SHARED_LIBRARY("CudaSharedLibrary"),
     CUDA_STATIC_LIBRARY("CudaStaticLibrary"),
     CUDA_EXECUTABLE("CudaExecutable"),
     EXECUTABLE("Executable"),
+    PREBUILT_API("PrebuiltApi"),
     PREBUILT_SHARED("PrebuiltShared"),
     PREBULIT_STATIC("PrebuiltStatic")
 

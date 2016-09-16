@@ -27,7 +27,7 @@ class ReportParser {
                     if (m.matches()) {
                         def name = sanitizeName(m.group(1))
                         ReportModuleType moduleType = ReportModuleType.from(m.group(2))
-                        assert moduleType != null : "$currentProject.name has unexpected Module Type: $moduleType"
+                        assert moduleType != null : "$currentProject.name has unexpected Module Type: ${m.group(2)}"
                         // Useful to build this map now to efficiently get projects which provide dependencies later.
                         depsProviderMap.put(name, currentProject)
                         Component component = componentFrom(name, moduleType)
@@ -66,6 +66,7 @@ class ReportParser {
                 toReturn.hasSharedLibrary = false
                 break
             case ReportModuleType.SHARED_LIBRARY:
+            case ReportModuleType.API_LIBRARY:
             case ReportModuleType.CUDA_SHARED_LIBRARY:
                 toReturn.type = GradleComponentType.NATIVE_LIBRARY_SPEC
                 toReturn.hasSharedLibrary = true
@@ -82,6 +83,7 @@ class ReportParser {
                 toReturn.type = GradleComponentType.PREBUILT_LIBRARY
                 break
             case ReportModuleType.PREBULIT_STATIC:
+            case ReportModuleType.PREBUILT_API:
                 toReturn.type = GradleComponentType.PREBUILT_LIBRARY
                 toReturn.hasSharedLibrary = false
                 break
