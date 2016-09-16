@@ -27,7 +27,6 @@ fi
 warmups=3
 runs=10
 
-local OPTIND OPTARG OPTERR opt
 while getopts "w:r:" opt; do
     case "${opt}" in
         w)
