@@ -71,4 +71,4 @@ JFR_FILENAME="$WORKDIR/GradleDaemon_${DAEMON_PID}_$(date +%F-%T).jfr"
 jcmd $DAEMON_PID JFR.stop name=GradleDaemon_$DAEMON_PID filename=$JFR_FILENAME
 
 echo "Output in $JFR_FILENAME ."
-jmc -open "$JFR_FILENAME"
+jmc -open "$JFR_FILENAME" &
