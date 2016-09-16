@@ -105,7 +105,7 @@ model {
             writer << '    components {\n'
             project.components.each { Component component ->
                 writer << "        ${component.name}(${component.type.name}) {\n"
-                if (!component.hasSharedLibrary) {
+                if (GradleComponentType.NATIVE_LIBRARY_SPEC == component.type && !component.hasSharedLibrary) {
                     writer << '            binaries.withType(SharedLibraryBinarySpec) {\n'
                     writer << '                buildable = false\n'
                     writer << '            }\n'
@@ -138,7 +138,7 @@ model {
             writer << '    testSuites {\n'
             project.testSuites.each { Component component ->
                 writer << "        ${component.name}(${component.type.name}) {\n"
-                writer << "            testing \$.components.${project.components.first().name}"
+                writer << "            testing \$.components.${project.components.first().name}\n"
                 writer << '        }\n'
             }
             writer << '    }\n'
