@@ -51,7 +51,9 @@ $> gradle assemble
  didn't want people to see it in the repo and think this project would
  behave just like any other one you've used before.
 
-## Profiling with honest-profiler
+## Integrated profiling tools
+
+### Profiling with honest-profiler
 
 There is a script [`prof.sh`](profiler/prof.sh) which automates running honest-profiler and creating a flamegraph of the execution.
 
@@ -59,13 +61,26 @@ These environment variables must be set to run the script:
 - `JAVA_HOME` : path to the JDK
 - `HP_HOME_DIR` : path to an installation of [honest-profiler](https://github.com/RichardWarburton/honest-profiler). This must be compiled from sources since it requires some changes that are in master branch.
 - `FG_HOME_DIR` : path to an installation of [FlameGraph](https://github.com/brendangregg/FlameGraph). This is a clone of the [FlameGraph repository](https://github.com/brendangregg/FlameGraph).
-- `GRADLE_BIN` : path to the gradle binary which will be used to execute the builds. 
+- `GRADLE_BIN` : path to the gradle binary which will be used to execute the builds. Could use `GRADLE_BIN=./gradlew` to use wrapper.
 
 Example command
 `GRADLE_BIN=~/.sdkman/gradle/3.1-rc-1/bin/gradle ./profiler/prof.sh assemble`
 
 
-## Profiling with gradle-profiler
+### Profiling with Java Flight Recorder
+
+There is a script [`jfr_prof.sh`](profiler/jfr_prof.sh) which automates running a build with Java Flight Recorder enabled.
+
+These environment variables must be set to run the script:
+- `JAVA_HOME` : path to the JDK
+- `GRADLE_BIN` : path to the gradle binary which will be used to execute the builds. Could use `GRADLE_BIN=./gradlew` to use wrapper.
+
+Example command
+`GRADLE_BIN=~/.sdkman/gradle/3.1-rc-1/bin/gradle ./profiler/jfr_prof.sh assemble`
+
+JFR dump files will be opened with `jmc -open` when the profiling is over. 
+
+### Profiling with gradle-profiler
 
 Clone [gradle-profiler](https://github.com/adammurdoch/gradle-profiler) to some directory and build it [according to the instructions](https://github.com/adammurdoch/gradle-profiler/blob/master/README.md).
 
