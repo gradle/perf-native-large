@@ -14,4 +14,7 @@ class Component {
     List<String> dependencies
     // Only relevant for org.gradle.generator.model.GradleComponentType.NATIVE_LIBRARY_SPEC
     boolean hasSharedLibrary
+    boolean hasStaticLibrary
+    boolean hasApiLibrary
+    List<Library> libraries
 }

@@ -4,6 +4,7 @@ import groovy.text.SimpleTemplateEngine
 import groovy.transform.CompileStatic
 import org.gradle.generator.model.Component
 import org.gradle.generator.model.GradleComponentType
+import org.gradle.generator.model.Library
 import org.gradle.generator.model.Project
 
 @CompileStatic
@@ -114,8 +115,14 @@ model {
                     writer << '                cpp {\n'
                     component.dependencies.each { String dep ->
                         if (depsProviderMap.containsKey(dep)) {
-                            def projectName = depsProviderMap[dep].name
-                            writer << "                    lib project: ':$projectName', library: '$dep', linkage: 'static'\n"
+                            def depProject = depsProviderMap[dep]
+                            for (Component depComponent : depProject.components) {
+                                for (Library lib : depComponent.libraries) {
+                                    if (lib.name == dep) {
+                                        writer << "                    lib project: ':$depProject.name', library: '$depComponent.name', linkage: '$lib.linkage.linkage'\n"
+                                    }
+                                }
+                            }
                         } else {
                             println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
                         }
