@@ -33,3 +33,7 @@ flames.svg
 flames.txt
 hp.log
 hp-ref.log
+
+# gradle-profiler
+profile.jfr
+profile.log
