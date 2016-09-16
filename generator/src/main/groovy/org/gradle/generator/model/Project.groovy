@@ -29,4 +29,12 @@ class Project {
         }
         results.toString()
     }
+
+    List<String> getExportedHeadersFor(Component component) {
+        if (GradleComponentType.GOOGLE_TEST_TEST_SUITE_SPEC == component.type) {
+            component.exportedHeaders + ["src/${components.first().name}/headers".toString()]
+        } else {
+            component.exportedHeaders
+        }
+    }
 }

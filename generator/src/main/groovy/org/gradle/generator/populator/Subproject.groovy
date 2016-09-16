@@ -54,7 +54,7 @@ class Subproject {
         numberOfSources.times {
             def binding = ["component" : component.name, "it": it]
             // We'll make the first source file have a main.
-            if (it == 0) {
+            if (needAMain && it == 0) {
                 def src = new File(cppDir, "main.cpp")
                 src << engine.createTemplate(BIN_CPP).make(binding)
             } else {
@@ -79,7 +79,7 @@ class Subproject {
         writer << 'plugins {\n'
         writer << "    id 'cpp'\n"
         if (project.testSuites) {
-            writer << "    id 'google-test-test-suite'"
+            writer << "    id 'google-test-test-suite'\n"
         }
         writer << '''}
 
@@ -103,43 +103,15 @@ model {
         }
         if (project.components) {
             writer << '    components {\n'
-            project.components.each { Component component ->
-                writer << "        ${component.name}(${component.type.name}) {\n"
-                if (GradleComponentType.NATIVE_LIBRARY_SPEC == component.type && !component.hasSharedLibrary) {
-                    writer << '            binaries.withType(SharedLibraryBinarySpec) {\n'
-                    writer << '                buildable = false\n'
-                    writer << '            }\n'
-                }
-                if (component.dependencies) {
-                    writer << '            sources {\n'
-                    writer << '                cpp {\n'
-                    component.dependencies.each { String dep ->
-                        if (depsProviderMap.containsKey(dep)) {
-                            def depProject = depsProviderMap[dep]
-                            for (Component depComponent : depProject.components) {
-                                for (Library lib : depComponent.libraries) {
-                                    if (lib.name == dep) {
-                                        writer << "                    lib project: ':$depProject.name', library: '$depComponent.name', linkage: '$lib.linkage.linkage'\n"
-                                    }
-                                }
-                            }
-                        } else {
-                            println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
-                        }
-                    }
-                    writer << '                }\n'
-                    writer << '            }\n'
-                }
-                writer << '        }\n'
+            project.components.each { component ->
+                writeComponent(writer, component)
             }
             writer << '    }\n'
         }
         if (project.testSuites) {
             writer << '    testSuites {\n'
-            project.testSuites.each { Component component ->
-                writer << "        ${component.name}(${component.type.name}) {\n"
-                writer << "            testing \$.components.${project.components.first().name}\n"
-                writer << '        }\n'
+            project.testSuites.each { component ->
+                writeComponent(writer, component)
             }
             writer << '    }\n'
         }
@@ -147,7 +119,44 @@ model {
         writer.close()
     }
 
-    def String getPrebuiltLibraryText() {
+    def void writeComponent(Writer writer, Component component) {
+        writer << "        ${component.name}(${component.type.name}) {\n"
+        if (GradleComponentType.GOOGLE_TEST_TEST_SUITE_SPEC == component.type) {
+            writer << "            testing \$.components.${project.components.first().name}\n"
+        }
+        if (GradleComponentType.NATIVE_LIBRARY_SPEC == component.type && !component.hasSharedLibrary) {
+            writer << '            binaries.withType(SharedLibraryBinarySpec) {\n'
+            writer << '                buildable = false\n'
+            writer << '            }\n'
+        }
+        if (component.dependencies || component.hasExtraExportedHeaders()) {
+            writer << '            sources {\n'
+            writer << '                cpp {\n'
+            if (component.hasExtraExportedHeaders()) {
+                def headers = project.getExportedHeadersFor(component)
+                writer << "                    exportedHeaders.srcDirs \'${headers.join("\', \'")}\'\n\n"
+            }
+            component.dependencies.each { String dep ->
+                if (depsProviderMap.containsKey(dep)) {
+                    def depProject = depsProviderMap[dep]
+                    for (Component depComponent : depProject.components) {
+                        for (Library lib : depComponent.libraries) {
+                            if (lib.name == dep) {
+                                writer << "                    lib project: ':$depProject.name', library: '$depComponent.name', linkage: '$lib.linkage.linkage'\n"
+                            }
+                        }
+                    }
+                } else {
+                    println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
+                }
+            }
+            writer << '                }\n'
+            writer << '            }\n'
+        }
+        writer << '        }\n'
+    }
+
+    static String getPrebuiltLibraryText() {
         '''                headers.srcDir "../prebuilt/util/src/util/headers"
                 binaries.withType(StaticLibraryBinary) {
                     def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a\'

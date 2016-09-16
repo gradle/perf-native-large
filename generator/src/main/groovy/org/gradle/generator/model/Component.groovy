@@ -73,4 +73,23 @@ class Component {
         }
         return libraries
     }
+
+    def boolean hasExtraExportedHeaders() {
+        return expectedPathCount < includePaths
+    }
+
+    def List<String> getExportedHeaders() {
+        List<String> exportedHeaders = ["src/$name/headers".toString()]
+        if (expectedPathCount < includePaths) {
+            exportedHeaders << "src/shared/headers"
+        }
+        if (expectedPathCount + 1 < includePaths) {
+            exportedHeaders << "src/$name/generated_headers".toString()
+        }
+        return exportedHeaders
+    }
+
+    private int getExpectedPathCount() {
+        (type == GradleComponentType.GOOGLE_TEST_TEST_SUITE_SPEC) ? 2 : 1
+    }
 }
