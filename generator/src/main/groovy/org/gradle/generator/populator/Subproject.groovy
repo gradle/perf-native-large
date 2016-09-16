@@ -117,7 +117,7 @@ model {
                             def projectName = depsProviderMap[dep].name
                             writer << "                    lib project: ':$projectName', library: '$dep', linkage: 'static'\n"
                         } else {
-                            // println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
+                            println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
                         }
                     }
                     writer << '                }\n'
