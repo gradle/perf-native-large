@@ -52,10 +52,17 @@ export GRADLE_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g -XX:+UnlockDiagnosticVMO
 echo "Killing all daemons before measurements"
 ps ax | grep GradleDaemon | awk '{print $1}' | xargs kill -9
 
+warmups_done=0
 for n in $(seq $warmups); do 
    echo "Warmup... $n/$warmups"
    $GRADLE_BIN --daemon -u "${buildparams[@]}"
+   warmups_done=1
 done
+
+# use 'help' to start daemon when warmup count is zero
+if [ $warmups_done -eq 0 ]; then
+   $GRADLE_BIN --daemon -u help
+fi
 
 echo "Starting profiler"
 DAEMON_PID=`jps | grep GradleDaemon | awk '{ print $1 }'`
