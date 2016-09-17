@@ -10,6 +10,7 @@ class Component {
     int headers
     int includePaths
     List<String> dependencies
+    List<String> transitiveDeps
     // Relevant for NATIVE_LIBRARY_SPEC and PREBUILT_LIBRARY
     boolean hasApiLibrary
     boolean hasSharedLibrary
@@ -22,6 +23,7 @@ class Component {
     Component(String name) {
         this.name = name
         dependencies = []
+        transitiveDeps = []
         apiLibrary = null
         sharedLibrary = null
         staticLibrary = null
@@ -62,13 +64,13 @@ class Component {
 
     def List<Library> getLibraries() {
         List<Library> libraries = []
-        if (hasApiLibrary) {
+        if (hasApiLibrary && apiLibrary != null) {
             libraries << apiLibrary
         }
-        if (hasSharedLibrary) {
+        if (hasSharedLibrary && sharedLibrary != null) {
             libraries << sharedLibrary
         }
-        if (hasStaticLibrary) {
+        if (hasStaticLibrary && staticLibrary != null) {
             libraries << staticLibrary
         }
         return libraries

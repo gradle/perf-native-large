@@ -13,7 +13,7 @@ $> git clone https://github.com/gradle/perf-native-large.git
 $> cd perf-native-large
 ```
 
-From here you need to run the generation script. It takes about 4 minutes to do it's work.
+From here you need to run the generation script. It takes about 30 seconds to do it's work.
 ```sh
 $> cd generator
 $> ./gradlew run

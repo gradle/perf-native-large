@@ -3,8 +3,8 @@ package org.gradle.generator.populator
 import groovy.text.SimpleTemplateEngine
 import groovy.transform.CompileStatic
 import org.gradle.generator.model.Component
+import org.gradle.generator.model.Dependency
 import org.gradle.generator.model.GradleComponentType
-import org.gradle.generator.model.Library
 import org.gradle.generator.model.Project
 
 @CompileStatic
@@ -12,15 +12,15 @@ class Subproject {
     static final File SRC_CPP = new File("src/main/templates/src.cpp")
     static final File SRC_H = new File("src/main/templates/src.h")
     static final File BIN_CPP = new File("src/main/templates/bin.cpp")
-    final Map<String, Project> depsProviderMap
+    final Map<String, Dependency> dependencyMap
     final SimpleTemplateEngine engine
     final Project project
     final File rootDir
 
-    Subproject(File rootDir, Project project, Map<String, Project> depsProviderMap) {
+    Subproject(File rootDir, Project project, Map<String, Dependency> dependencyMap) {
         this.rootDir = rootDir
         this.project = project
-        this.depsProviderMap = depsProviderMap
+        this.dependencyMap = dependencyMap
         this.engine = new SimpleTemplateEngine()
     }
 
@@ -52,7 +52,11 @@ class Subproject {
                 || GradleComponentType.GOOGLE_TEST_TEST_SUITE_SPEC == component.type)
         def numberOfSources = component.sources
         numberOfSources.times {
-            def binding = ["component" : component.name, "it": it]
+            def binding = [
+                    "component" : component.name,
+                    "it": it,
+                    "deps": component.dependencies,
+                    "dependencyMap": dependencyMap]
             // We'll make the first source file have a main.
             if (needAMain && it == 0) {
                 def src = new File(cppDir, "main.cpp")
@@ -62,13 +66,30 @@ class Subproject {
                 src << engine.createTemplate(SRC_CPP).make(binding)
             }
         }
-        def headersDir = new File(projectDir, "src/$component.name/headers")
+        def headersDir = new File(projectDir, "src/$component.name/headers/$component.name")
         headersDir.mkdirs()
         def numberOfHeaders = component.headers
+        if (numberOfHeaders == 0) {
+            // If we didn't have at least one header, then we can't depend on the component blindly.
+            numberOfHeaders = 1
+        }
         numberOfHeaders.times {
-            def binding = ["component" : component.name, "it": it]
             def hFile = new File(headersDir, "lib${it+1}.h")
-            hFile << engine.createTemplate(SRC_H).make(binding)
+            if (GradleComponentType.PREBUILT_LIBRARY == component.type) {
+                def utilHFile = new File('../prebuilt/util/src/util/headers/util.h')
+                hFile << utilHFile.text
+            } else {
+                def binding = [
+                        "component"    : component.name,
+                        "it"           : it,
+                        "deps"         : component.dependencies,
+                        "dependencyMap": dependencyMap]
+                if (it > 0) {
+                    // Just creating way too many #include lines. Really only need one link to each dependency.
+                    binding.deps = []
+                }
+                hFile << engine.createTemplate(SRC_H).make(binding)
+            }
         }
     }
 
@@ -95,6 +116,7 @@ model {
             writer << '        libs(PrebuiltLibraries) {\n'
             project.prebuiltLibraries.each { Component component ->
                 writer << "            ${component.name} {\n"
+                writer << "                headers.srcDir \"src/${component.name}/headers\"\n"
                 writer << getPrebuiltLibraryText()
                 writer << "            }\n"
             }
@@ -129,7 +151,7 @@ model {
             writer << '                buildable = false\n'
             writer << '            }\n'
         }
-        if (component.dependencies || component.hasExtraExportedHeaders()) {
+        if (component.dependencies || component.transitiveDeps || component.hasExtraExportedHeaders()) {
             writer << '            sources {\n'
             writer << '                cpp {\n'
             if (component.hasExtraExportedHeaders()) {
@@ -137,15 +159,17 @@ model {
                 writer << "                    exportedHeaders.srcDirs \'${headers.join("\', \'")}\'\n\n"
             }
             component.dependencies.each { String dep ->
-                if (depsProviderMap.containsKey(dep)) {
-                    def depProject = depsProviderMap[dep]
-                    for (Component depComponent : depProject.components) {
-                        for (Library lib : depComponent.libraries) {
-                            if (lib.name == dep) {
-                                writer << "                    lib project: ':$depProject.name', library: '$depComponent.name', linkage: '$lib.linkage.linkage'\n"
-                            }
-                        }
-                    }
+                if (dependencyMap.containsKey(dep)) {
+                    def d = dependencyMap[dep]
+                    writer << "                    lib project: ':$d.projectName', library: '$d.componentName', linkage: '$d.library.linkage.name'\n"
+                } else {
+                    println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
+                }
+            }
+            component.transitiveDeps.each { String dep ->
+                if (dependencyMap.containsKey(dep)) {
+                    def d = dependencyMap[dep]
+                    writer << "                    lib project: ':$d.projectName', library: '$d.componentName', linkage: '$d.library.linkage.name'\n"
                 } else {
                     println "Bad Data: No project defines: $dep needed by $project.name:$component.name"
                 }
@@ -157,8 +181,7 @@ model {
     }
 
     static String getPrebuiltLibraryText() {
-        '''                headers.srcDir "../prebuilt/util/src/util/headers"
-                binaries.withType(StaticLibraryBinary) {
+        '''                binaries.withType(StaticLibraryBinary) {
                     def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a\'
                     staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
                 }
@@ -172,7 +195,7 @@ model {
                             sharedLibraryLinkFile = file("${baseDir}/util.lib")
                         }
                     } else if (os.macOsX) {
-                        sharedLibraryFile = file("${baseDir}/libhello.dylib")
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
                     } else {
                         sharedLibraryFile = file("${baseDir}/libutil.so")
                     }

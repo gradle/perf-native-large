@@ -8,9 +8,9 @@ enum Linkage {
     SHARED("shared"),
     API("api")
 
-    final String linkage
+    final String name
 
-    Linkage(String linkage) {
-        this.linkage = linkage
+    Linkage(String name) {
+        this.name = name
     }
 }
