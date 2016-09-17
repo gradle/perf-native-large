@@ -1,0 +1,13 @@
+plugins {
+  id "cpp"
+}
+
+subprojects {
+    model {
+        binaries {
+            withType(NativeBinarySpec) {
+                cppCompiler.define('SOME_MACRO', 'some_value')
+            }
+        }
+    }
+}
