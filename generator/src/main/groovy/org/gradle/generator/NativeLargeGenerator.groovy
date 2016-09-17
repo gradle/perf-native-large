@@ -23,7 +23,7 @@ class NativeLargeGenerator {
         Map<String, Dependency> dependencyMap = [:]
         populateDependencyMap(depsProviderMap, dependencyMap)
 
-        pruneTransitiveDeps(projects, depsProviderMap, dependencyMap)
+        // pruneTransitiveDeps(projects, depsProviderMap, dependencyMap)
 
         new Root(outputDir).populateWith(projects, dependencyMap)
     }
