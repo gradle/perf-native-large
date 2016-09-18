@@ -26,9 +26,13 @@ fi
 
 warmups=3
 runs=10
+allocations=0
 
-while getopts "w:r:" opt; do
+while getopts "aw:r:" opt; do
     case "${opt}" in
+        a)
+        allocations=1
+        ;;
         w)
         warmups="${OPTARG}"
         ;;
@@ -45,7 +49,14 @@ else
   buildparams=( "$@" )
 fi
 
-export GRADLE_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:FlightRecorderOptions=stackdepth=1024'"
+extra_opts=()
+jfr_opts="stackdepth=1024"
+if [ $allocations -eq 1 ]; then
+    # TLAB allocations must be disabled to profile all allocations, this adds a lot of overhead
+    extra_opts=("${extra_opts[@]}" -XX:-UseTLAB -XX:MaxJavaStackTraceDepth=20)
+    jfr_opts="stackdepth=1024,disk=true,globalbuffersize=500M,maxchunksize=120M,threadbuffersize=200k"
+fi
+export GRADLE_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g ${extra_opts[@]} -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:FlightRecorderOptions=${jfr_opts}'"
 
 # END OF CONFIGURATION
 
@@ -66,7 +77,8 @@ fi
 
 echo "Starting profiler"
 DAEMON_PID=`jps | grep GradleDaemon | awk '{ print $1 }'`
-jcmd $DAEMON_PID JFR.start name=GradleDaemon_$DAEMON_PID settings=$DIR/profiling.jfc maxsize=1G
+JFR_FILENAME="$WORKDIR/GradleDaemon_${DAEMON_PID}_$(date +%F-%T).jfr"
+jcmd $DAEMON_PID JFR.start name=GradleDaemon_$DAEMON_PID settings=$DIR/profiling.jfc filename=$JFR_FILENAME dumponexit=true
 
 echo "Measuring..."
 for n in $(seq $runs); do 
@@ -74,8 +86,7 @@ for n in $(seq $runs); do
   $GRADLE_BIN --daemon -u "${buildparams[@]}"
 done
 
-JFR_FILENAME="$WORKDIR/GradleDaemon_${DAEMON_PID}_$(date +%F-%T).jfr"
-jcmd $DAEMON_PID JFR.stop name=GradleDaemon_$DAEMON_PID filename=$JFR_FILENAME
+jcmd $DAEMON_PID JFR.stop name=GradleDaemon_$DAEMON_PID
 
 echo "Output in $JFR_FILENAME ."
 jmc -open "$JFR_FILENAME" &
