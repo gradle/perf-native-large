@@ -50,7 +50,7 @@ else
 fi
 
 extra_opts=()
-jfr_opts="stackdepth=1024"
+jfr_opts="stackdepth=1024,disk=true"
 if [ $allocations -eq 1 ]; then
     # TLAB allocations must be disabled to profile all allocations, this adds a lot of overhead
     extra_opts=("${extra_opts[@]}" -XX:-UseTLAB -XX:MaxJavaStackTraceDepth=20)
