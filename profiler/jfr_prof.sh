@@ -56,7 +56,13 @@ if [ $allocations -eq 1 ]; then
     extra_opts=("${extra_opts[@]}" -XX:-UseTLAB -XX:MaxJavaStackTraceDepth=20)
     jfr_opts="stackdepth=1024,disk=true,globalbuffersize=500M,maxchunksize=120M,threadbuffersize=200k"
 fi
-export GRADLE_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g ${extra_opts[@]} -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:FlightRecorderOptions=${jfr_opts}'"
+if [ -f $WORKDIR/gradle.properties ]; then
+    mem_args=`egrep "^org.gradle.jvmargs=" gradle.properties | awk -F= '{ print $ 2}'`
+fi
+if [ -z "$mem_args" ]; then
+    mem_args="-Xmx4g -Xverify:none"
+fi
+export GRADLE_OPTS="-Dorg.gradle.jvmargs='${mem_args} ${extra_opts[@]} -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:FlightRecorderOptions=${jfr_opts}'"
 
 # END OF CONFIGURATION
 

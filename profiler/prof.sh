@@ -67,7 +67,13 @@ else
   buildparams=( "$@" )
 fi
 
-export GRADLE_OPTS="-Dorg.gradle.jvmargs='-Xmx8g -Xms8g -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -agentpath:$HP_HOME_DIR/liblagent.so=interval=$interval,logPath=$WORKDIR/hp.log,port=18080,host=localhost,start=0'"
+if [ -f $WORKDIR/gradle.properties ]; then
+    mem_args=`egrep "^org.gradle.jvmargs=" gradle.properties | awk -F= '{ print $ 2}'`
+fi
+if [ -z "$mem_args" ]; then
+    mem_args="-Xmx4g -Xverify:none"
+fi
+export GRADLE_OPTS="-Dorg.gradle.jvmargs='${mem_args} -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints -agentpath:$HP_HOME_DIR/liblagent.so=interval=$interval,logPath=$WORKDIR/hp.log,port=18080,host=localhost,start=0'"
 
 # END OF CONFIGURATION
 
