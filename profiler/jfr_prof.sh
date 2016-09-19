@@ -57,7 +57,7 @@ if [ $allocations -eq 1 ]; then
     jfr_opts="stackdepth=1024,disk=true,globalbuffersize=500M,maxchunksize=120M,threadbuffersize=200k"
 fi
 if [ -f $WORKDIR/gradle.properties ]; then
-    mem_args=`egrep "^org.gradle.jvmargs=" gradle.properties | awk -F= '{ print $ 2}'`
+    mem_args=`egrep "^org.gradle.jvmargs=" $WORKDIR/gradle.properties | awk -F= '{ print $2 }'`
 fi
 if [ -z "$mem_args" ]; then
     mem_args="-Xmx4g -Xverify:none"
