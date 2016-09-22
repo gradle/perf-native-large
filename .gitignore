@@ -1,7 +1,3 @@
-# Generated Sources
-project*
-settings.gradle
-
 .gradle
 build/
 out/
