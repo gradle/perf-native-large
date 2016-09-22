@@ -1,0 +1,18 @@
+plugins {
+    id 'cpp'
+}
+
+model {
+    buildTypes {
+        debug
+        release
+        prod
+    }
+    components {
+        component164(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+plugins {
+    id 'cpp'
+}
+
+model {
+    buildTypes {
+        debug
+        release
+        prod
+    }
+    components {
+        component1061(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component1061/headers', 'src/shared/headers', 'src/component1061/generated_headers'
+
+                }
+            }
+        }
+    }
+}

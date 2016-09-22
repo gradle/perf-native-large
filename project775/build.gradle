@@ -1,0 +1,29 @@
+plugins {
+    id 'cpp'
+    id 'google-test-test-suite'
+}
+
+model {
+    buildTypes {
+        debug
+        release
+        prod
+    }
+    components {
+        component922(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+        }
+    }
+    testSuites {
+        testComponent963(GoogleTestTestSuiteSpec) {
+            testing $.components.component922
+            sources {
+                cpp {
+                    lib project: ':project432', library: 'externalComponent204', linkage: 'static'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+plugins {
+    id 'cpp'
+}
+
+model {
+    buildTypes {
+        debug
+        release
+        prod
+    }
+    components {
+        component940(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    lib project: ':project432', library: 'externalComponent96', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent88', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent97', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent98', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent99', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent100', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent101', linkage: 'static'
+                }
+            }
+        }
+    }
+}

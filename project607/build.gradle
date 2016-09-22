@@ -1,0 +1,63 @@
+plugins {
+    id 'cpp'
+}
+
+model {
+    buildTypes {
+        debug
+        release
+        prod
+    }
+    components {
+        component603(NativeExecutableSpec) {
+            sources {
+                cpp {
+                    lib project: ':project432', library: 'externalComponent122', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent24', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent25', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent26', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent27', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent28', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent29', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent30', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent31', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent32', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent33', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent34', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent35', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent36', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent37', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent38', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent39', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent40', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent41', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent42', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent43', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent44', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent45', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent46', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent47', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent48', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent49', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent50', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent51', linkage: 'api'
+                    lib project: ':project432', library: 'externalComponent9', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent10', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent11', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent12', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent13', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent14', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent15', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent16', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent17', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent18', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent19', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent20', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent21', linkage: 'api'
+                    lib project: ':project432', library: 'externalComponent170', linkage: 'api'
+                    lib project: ':project432', library: 'externalComponent221', linkage: 'api'
+                }
+            }
+        }
+    }
+}

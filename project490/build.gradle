@@ -1,0 +1,1007 @@
+plugins {
+    id 'cpp'
+}
+
+model {
+    buildTypes {
+        debug
+        release
+        prod
+    }
+    repositories { 
+        libs(PrebuiltLibraries) {
+            component365 {
+                headers.srcDir "src/component365/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component367 {
+                headers.srcDir "src/component367/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component368 {
+                headers.srcDir "src/component368/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component332 {
+                headers.srcDir "src/component332/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component369 {
+                headers.srcDir "src/component369/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component331 {
+                headers.srcDir "src/component331/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component370 {
+                headers.srcDir "src/component370/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component329 {
+                headers.srcDir "src/component329/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component371 {
+                headers.srcDir "src/component371/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component330 {
+                headers.srcDir "src/component330/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component375 {
+                headers.srcDir "src/component375/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component327 {
+                headers.srcDir "src/component327/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component379 {
+                headers.srcDir "src/component379/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component326 {
+                headers.srcDir "src/component326/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component380 {
+                headers.srcDir "src/component380/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component333 {
+                headers.srcDir "src/component333/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component383 {
+                headers.srcDir "src/component383/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component325 {
+                headers.srcDir "src/component325/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component384 {
+                headers.srcDir "src/component384/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component328 {
+                headers.srcDir "src/component328/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component385 {
+                headers.srcDir "src/component385/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component335 {
+                headers.srcDir "src/component335/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component386 {
+                headers.srcDir "src/component386/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component323 {
+                headers.srcDir "src/component323/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component387 {
+                headers.srcDir "src/component387/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component324 {
+                headers.srcDir "src/component324/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component388 {
+                headers.srcDir "src/component388/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component322 {
+                headers.srcDir "src/component322/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component389 {
+                headers.srcDir "src/component389/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component321 {
+                headers.srcDir "src/component321/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component390 {
+                headers.srcDir "src/component390/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component334 {
+                headers.srcDir "src/component334/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component391 {
+                headers.srcDir "src/component391/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component336 {
+                headers.srcDir "src/component336/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component392 {
+                headers.srcDir "src/component392/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+            component134 {
+                headers.srcDir "src/component134/headers"
+                binaries.withType(StaticLibraryBinary) {
+                    def libName = targetPlatform.operatingSystem.windows ? 'util.lib' : 'libutil.a'
+                    staticLibraryFile = file("../prebuilt/util/build/libs/util/static/${buildType.name}/${libName}")
+                }
+                binaries.withType(SharedLibraryBinary) {
+                    def os = targetPlatform.operatingSystem
+                    def baseDir = "../prebuilt/util/build/libs/util/shared/${buildType.name}"
+                    if (os.windows) {
+                        // Windows uses a .dll file, with a different link file if it exists (not Cygwin or MinGW)
+                        sharedLibraryFile = file("${baseDir}/util.dll")
+                        if (file("${baseDir}/util.lib").exists()) {
+                            sharedLibraryLinkFile = file("${baseDir}/util.lib")
+                        }
+                    } else if (os.macOsX) {
+                        sharedLibraryFile = file("${baseDir}/libutil.dylib")
+                    } else {
+                        sharedLibraryFile = file("${baseDir}/libutil.so")
+                    }
+                }
+            }
+        }
+    }
+    components {
+        component393(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component393/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component395(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component395/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component396(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component396/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component397(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component397/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component398(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component398/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component399(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component399/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component400(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component400/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component401(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component401/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component402(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component402/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component403(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component403/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component404(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component404/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component405(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component405/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component406(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component406/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component407(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component407/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component408(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component408/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component409(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component409/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+        component410(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component410/headers', 'src/shared/headers', 'src/component410/generated_headers'
+
+                }
+            }
+        }
+        component411(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    exportedHeaders.srcDirs 'src/component411/headers', 'src/shared/headers'
+
+                }
+            }
+        }
+    }
+}

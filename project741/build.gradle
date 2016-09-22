@@ -1,0 +1,49 @@
+plugins {
+    id 'cpp'
+    id 'google-test-test-suite'
+}
+
+model {
+    buildTypes {
+        debug
+        release
+        prod
+    }
+    components {
+        component246(NativeLibrarySpec) {
+            binaries.withType(SharedLibraryBinarySpec) {
+                buildable = false
+            }
+            sources {
+                cpp {
+                    lib project: ':project432', library: 'externalComponent103', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent104', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent105', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent106', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent107', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent108', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent88', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent109', linkage: 'shared'
+                }
+            }
+        }
+    }
+    testSuites {
+        testComponent885(GoogleTestTestSuiteSpec) {
+            testing $.components.component246
+            sources {
+                cpp {
+                    lib project: ':project432', library: 'externalComponent103', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent104', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent105', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent106', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent107', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent108', linkage: 'static'
+                    lib project: ':project432', library: 'externalComponent88', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent109', linkage: 'shared'
+                    lib project: ':project432', library: 'externalComponent204', linkage: 'static'
+                }
+            }
+        }
+    }
+}
