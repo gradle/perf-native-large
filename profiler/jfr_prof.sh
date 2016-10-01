@@ -82,7 +82,8 @@ if [ $warmups_done -eq 0 ]; then
 fi
 
 echo "Starting profiler"
-DAEMON_PID=`jps | grep GradleDaemon | awk '{ print $1 }'`
+[ -f gradle.pid ] && DAEMON_PID=`cat gradle.pid`
+[ -n "$DAEMON_PID" ] || DAEMON_PID=`jps | grep GradleDaemon | awk '{ print $1 }'`
 JFR_FILENAME="$WORKDIR/GradleDaemon_${DAEMON_PID}_$(date +%F-%T).jfr"
 jcmd $DAEMON_PID JFR.start name=GradleDaemon_$DAEMON_PID settings=$DIR/profiling.jfc filename=$JFR_FILENAME dumponexit=true
 
