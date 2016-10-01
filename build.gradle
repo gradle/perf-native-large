@@ -1,6 +1,4 @@
-plugins {
-  id "cpp"
-}
+apply plugin: 'cpp'
 
 subprojects {
     model {
