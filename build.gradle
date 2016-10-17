@@ -1,3 +1,17 @@
+buildscript {
+    dependencies {
+        def measurementPluginJar = project.hasProperty('measurementPluginJar') ? project.property('measurementPluginJar') : null
+        if(measurementPluginJar) {
+            classpath files(measurementPluginJar)
+        }
+    }
+}
+
+def measurementPluginJar = project.hasProperty('measurementPluginJar') ? project.property('measurementPluginJar') : null
+if(measurementPluginJar) {
+    apply plugin: org.gradle.performance.plugin.MeasurementPlugin
+}
+
 apply plugin: 'cpp'
 
 subprojects {
@@ -9,3 +23,8 @@ subprojects {
         }
     }
 }
+
+if(measurementPluginJar) {
+    org.gradle.performance.plugin.BuildEventTimeStamps.settingsEvaluated()
+}
+
