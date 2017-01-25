@@ -1,0 +1,14 @@
+upToDateAssemble {
+	tasks = ["assemble"]
+}
+
+nonAbiChange {
+	tasks = ["assemble"]
+	apply-cpp-change-to = "project785/src/component595/cpp/lib1.cpp"
+}
+
+abiChange {
+	tasks = ["assemble"]
+	apply-cpp-change-to = "project785/src/component595/cpp/lib1.cpp"
+	apply-h-change-to = "project785/src/component595/headers/component595/lib1.h"
+}

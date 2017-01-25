@@ -53,6 +53,12 @@ $> gradle assemble
 
 ## Integrated profiling tools
 
+### Profiling with gradle-profiler
+
+Use the Gradle profiler to `--benchmark` or `--profile` scenarios. The available scenarios are defined in `performance.scenarios`
+
+Example usage: `./gradle-profiler --profile chrome-trace upToDateAssemble`
+
 ### Profiling with honest-profiler
 
 There is a script [`prof.sh`](profiler/prof.sh) which automates running honest-profiler and creating a flamegraph of the execution.
@@ -79,18 +85,3 @@ Example command
 `GRADLE_BIN=~/.sdkman/gradle/3.1-rc-1/bin/gradle ./profiler/jfr_prof.sh assemble`
 
 JFR dump files will be opened with `jmc -open` when the profiling is over. 
-
-### Profiling with gradle-profiler
-
-Clone [gradle-profiler](https://github.com/adammurdoch/gradle-profiler) to some directory and build it [according to the instructions](https://github.com/adammurdoch/gradle-profiler/blob/master/README.md).
-
-Example commands to do profiling
-```
-sdk u gradle 3.1-rc-1
-gradle wrapper
-echo 'org.gradle.jvmargs=-Xms8g -Xmx8g' >> gradle.properties
-../gradle-profiler/build/install/gradle-profiler/bin/gradle-profiler --project-dir $PWD assemble
-jmc -open profile.jfr
-```
-
-Make sure the project has a wrapper created with the version of Gradle that is being tested.

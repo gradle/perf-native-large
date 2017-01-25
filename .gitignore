@@ -33,3 +33,5 @@ hp-ref.log
 # gradle-profiler
 profile.jfr
 profile.log
+profile-out*
+gradle-user-home
