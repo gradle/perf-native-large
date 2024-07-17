@@ -7,7 +7,7 @@ plugins {
 mainClassName = 'org.gradle.generator.NativeLargeGenerator'
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
